@@ -22,7 +22,7 @@ export default function chatbot() {
                 alt=''
                 fill
                 style={{
-                  border: '1px solid lightgray;',
+                  border: '1px solid lightgray',
                 }}
               />
               <div className='descript'>조카 생일선물 추천해줌ㅋㅋ</div>
@@ -35,7 +35,7 @@ export default function chatbot() {
                 alt=''
                 fill
                 style={{
-                  border: '1px solid lightgray;',
+                  border: '1px solid lightgray',
                 }}
               />
               <div className='descript'>역사 가르쳐줌 ㄷㄷ</div>
@@ -48,7 +48,7 @@ export default function chatbot() {
                 alt=''
                 fill
                 style={{
-                  border: '1px solid lightgray;',
+                  border: '1px solid lightgray',
                 }}
               />
               <div className='descript'>코딩도 해줌 ㄷㄷ</div>
@@ -61,7 +61,7 @@ export default function chatbot() {
                 alt=''
                 fill
                 style={{
-                  border: '1px solid lightgray;',
+                  border: '1px solid lightgray',
                 }}
               />
               <div className='descript'>인생 조언도 해줌 ㅡㅡ</div>
