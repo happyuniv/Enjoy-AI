@@ -12,6 +12,10 @@ export default function Layout({ children }: PropsWithChildren) {
 
       <style jsx global>
         {`
+          :root {
+            --theme: rgb(133, 28, 225);
+          }
+
           html {
             font-size: 62.5%;
           }
