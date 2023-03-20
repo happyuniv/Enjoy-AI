@@ -10,42 +10,53 @@ export default function Chatbot() {
   ] as Message[])
   const [input, setInput] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     scrollRef.current?.scrollTo(0, scrollRef.current?.scrollHeight)
   }, [messages])
 
+  useEffect(() => {
+    inputRef.current?.focus({ preventScroll: true })
+  }, [typing])
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+
     if (!input) return
 
-    const prompt = input
+    const userMessage = input
 
     setMessages([...messages, { who: 'user', message: input }])
     setInput('')
     setTyping(true)
     setLoading(true)
 
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(prompt),
-      })
-      const result = await res.json()
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userMessage),
+    })
+
+    const result = await res.json()
+
+    if (!res.ok) {
+      setMessages((messages) => [
+        ...messages,
+        { who: 'system', message: '데이터를 받아오는 중 에러가 발생했습니다' },
+      ])
+      setTyping(false)
+    } else {
       const botMessage = result.trim()
       setMessages((messages) => [
         ...messages,
         { who: 'bot', message: botMessage },
       ])
-      setLoading(false)
-    } catch (e) {
-      console.error(e)
-      setTyping(false)
-      setLoading(false)
     }
+
+    setLoading(false)
   }
 
   return (
@@ -69,6 +80,7 @@ export default function Chatbot() {
               placeholder={typing ? '대답하는중...' : '채팅해봐요!'}
               disabled={typing}
               value={input}
+              ref={inputRef}
               onChange={(e) => setInput(e.target.value)}
             />
             <button disabled={typing}>
@@ -83,6 +95,7 @@ export default function Chatbot() {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 20px;
             height: 100vh;
             border: 1px solid lightgray;
           }
@@ -121,6 +134,12 @@ export default function Chatbot() {
 
           .ai {
             background-color: rgba(235, 223, 223, 0.359);
+          }
+          .system {
+            background-color: rgba(238, 145, 145, 0.738);
+          }
+          .system .container-message {
+            justify-content: center;
           }
 
           .profile {

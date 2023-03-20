@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 export type Message = {
-  who: 'user' | 'bot'
+  who: 'user' | 'bot' | 'system'
   message: string
 }
 
@@ -34,7 +34,7 @@ export function BotLoading() {
     </div>
   )
 }
-export default function ChatTyping({ who, message,setTyping }: props) {
+export default function ChatTyping({ who, message, setTyping }: props) {
   const [text, setText] = useState('')
   const [index, setIndex] = useState(0)
 
@@ -45,7 +45,7 @@ export default function ChatTyping({ who, message,setTyping }: props) {
         setIndex(index + 1)
       }, 50)
 
-    if(index===message.length) setTyping(false)
+    if (index === message.length) setTyping(false)
   }, [index])
 
   return (
@@ -59,13 +59,19 @@ export default function ChatTyping({ who, message,setTyping }: props) {
             <div className='message'>{message}</div>
           </div>
         </div>
-      ) : (
+      ) : who === 'bot' ? (
         <div className={'wrapper ai'}>
           <div className='container-message'>
             <div className='profile'>
               <Image src='/bot.svg' alt='logo' width={40} height={40} />
             </div>
             <div className='message'>{text}</div>
+          </div>
+        </div>
+      ) : (
+        <div className='wrapper system'>
+          <div className='container-message'>
+            <div className='message'>{message}</div>
           </div>
         </div>
       )}

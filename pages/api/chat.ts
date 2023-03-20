@@ -5,15 +5,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const prompt = req.body
+  const userMessage = req.body
   const payload = {
-    model: 'text-davinci-003',
-    prompt,
-    max_tokens: 100,
+    model: 'gpt-3.5-turbo',
+    messages: [
+      {
+        role: 'user',
+        content: userMessage,
+      },
+    ],
+    max_tokens: 200,
     temperature: 0.7,
   }
 
-  const response = await fetch('https://api.openai.com/v1/completions', {
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -23,7 +28,8 @@ export default async function handler(
   })
 
   const data = await response.json()
-  const result = data.choices[0].text
+  const result = data.choices[0].message.content
 
-  return res.json(result)
+  if (result) res.status(200).json(result)
+  else res.status(500).json('Failed to fetch data')
 }
