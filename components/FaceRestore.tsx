@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { DragEvent, ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import LoadingIndicator from './LoadingIndicator'
 import Uploader from './Uploader'
 
@@ -159,6 +159,12 @@ export default function FaceRestore() {
             cursor: pointer;
             color: var(--theme);
             background-color: transparent;
+          }
+
+          @media screen and (max-width: 600px) {
+            .container-compare {
+              flex-direction: column;
+            }
           }
         `}
       </style>
