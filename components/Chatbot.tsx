@@ -61,7 +61,7 @@ export default function Chatbot() {
 
   return (
     <>
-      <div className='container-chatbot'>
+      <div id='experience' className='container-chatbot'>
         <div className='container-chat' ref={scrollRef}>
           {messages.map(({ who, message }, index) => (
             <ChatTyping

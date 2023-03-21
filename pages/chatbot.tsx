@@ -98,7 +98,7 @@ export default function chatbot() {
         </section>
         <section className='experience'>
           <div className='wrapper'>
-            <h2 id='experience'>경험하기</h2>
+            <h2>경험하기</h2>
             <ul>
               <li>
                 여기서 경험하는 인공지능은 OpenAI에서 제공하는 ChatGPT 모델을
