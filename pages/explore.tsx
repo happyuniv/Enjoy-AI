@@ -5,6 +5,8 @@ import Link from 'next/link'
 export default function explore() {
   return (
     <>
+    <div className="container">
+
       <section className='intro'>
         <h1>
           <div>인공지능!?</div>
@@ -97,13 +99,14 @@ export default function explore() {
           </article>
         </div>
       </section>
+    </div>
 
       <style jsx>{`
         .intro {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin: 20px 0;
+          margin: 50px 0;
         }
         .intro h1 {
           font-size: 5rem;
@@ -195,8 +198,26 @@ export default function explore() {
         }
 
         @media screen and (max-width: 800px) {
+          .intro h1 {
+            font-size: 4rem;
+          }
+          .intro h2 {
+            font-size: 1.6rem;
+          }
           .container-item .item {
             width: 100%;
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          .intro {
+            padding: 0 30px;
+          }
+          .intro h1 {
+            font-size: 3rem;
+          }
+          .intro h2 {
+            font-size: 1.4rem;
           }
         }
       `}</style>
