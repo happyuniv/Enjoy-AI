@@ -82,8 +82,8 @@ export default function face_restore() {
             </li>
           </ul>
         </section>
-        <section className='experience'>
-          <h2 id='experience'>경험하기</h2>
+        <section id='experience' className='experience'>
+          <h2>경험하기</h2>
           <ul>
             <li>여기서 경험하는 인공지능은 GFP-GAN v1.4 모델을 사용합니다</li>
           </ul>
@@ -93,9 +93,13 @@ export default function face_restore() {
 
       <style jsx>{`
         .container {
+        }
+
+        section {
           padding: 0 30px;
         }
         .intro {
+          padding-top: 30px;
           background: linear-gradient(
             to bottom left,
             rgba(203, 249, 241, 0.147) 30%,
@@ -208,6 +212,52 @@ export default function face_restore() {
           font-size: 1.4rem;
           list-style-position: inside;
           list-style-type: square;
+        }
+
+        @media screen and (max-width: 900px) {
+          .intro .title {
+            font-size: 3.2rem;
+            text-align: center;
+          }
+          .intro .tag {
+            text-align: center;
+          }
+          .intro h2 {
+            font-size: 2.5rem;
+            text-align: center;
+          }
+
+          .learn li {
+            text-align: center;
+          }
+          .learn li p {
+            font-size: 1.6rem;
+          }
+        }
+        @media screen and (max-width: 600px) {
+          .intro .title {
+            font-size: 3rem;
+            white-space: pre-line;
+          }
+          .intro h2 {
+            font-size: 2rem;
+          }
+          .ability h2 {
+            font-size: 2rem;
+          }
+          .ability h3 {
+            font-size: 1.6rem;
+          }
+          .ability .container-compare {
+            flex-direction: column;
+          }
+          .container-compare .title {
+            font-size: 1.6rem;
+          }
+
+          .learn li p {
+            font-size: 1.4rem;
+          }
         }
       `}</style>
     </>
