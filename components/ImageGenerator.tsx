@@ -1,35 +1,37 @@
 import Image from 'next/image'
 import { useState } from 'react'
+import LoadingIndicator from './LoadingIndicator'
 
 export default function ImageGenerator() {
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [payload, setPayload] = useState<Record<string, string>>({
-    image_size: '768x768',
+    image_dimensions: '768x768',
   })
   const [result, setResult] = useState('')
 
   const handleSubmit = async () => {
-    try {
-      setLoading(true)
-      const res = await fetch('/api/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-      const data = await res.json()
+    setError(null)
+    setLoading(true)
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+    const data = await res.json()
+    if (!res.ok) {
+      setError(data)
+    } else {
       setResult(data)
-      setLoading(false)
-    } catch (e) {
-      console.error(e)
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   return (
     <>
-      <div className='container-generator'>
+      <div className='container'>
         <div className='left'>
           <label htmlFor='input-prompt'>명령어</label>
           <textarea
@@ -67,22 +69,27 @@ export default function ImageGenerator() {
         <div className='right'>
           <label>생성 이미지</label>
           <div className='container-output'>
-            {result ? (
+            {loading && (
+              <div className='holder'>
+                <LoadingIndicator />
+              </div>
+            )}
+            {error && (
+              <div className='holder'>
+                <Image src={'/error.svg'} alt='error' width={48} height={48} />
+                <p className='error'>
+                  이미지 생성 중 에러가 발생했습니다 {'\n'}({error})
+                </p>
+              </div>
+            )}
+            {!loading && !error && !result && (
+              <div className='holder'>
+                <Image src={'/photo.svg'} alt='photo' width={32} height={32} />
+              </div>
+            )}
+            {result && (
               <div className='generated'>
                 <Image src={result} alt='생성 이미지' fill />
-              </div>
-            ) : (
-              <div className='holder'>
-                {loading ? (
-                  <span>로딩중</span>
-                ) : (
-                  <Image
-                    src={'/photo.svg'}
-                    alt='photo'
-                    width={32}
-                    height={32}
-                  />
-                )}
               </div>
             )}
           </div>
@@ -90,37 +97,37 @@ export default function ImageGenerator() {
       </div>
       <style jsx>
         {`
-          .container-generator {
+          .container {
             display: flex;
             margin-top: 20px;
           }
 
-          .container-generator .left {
+          .container .left {
             flex: 1;
             display: flex;
             flex-direction: column;
           }
 
-          .container-generator label {
+          .container label {
             margin: 15px 0;
             color: var(--theme);
             font-size: 2.5rem;
             font-weight: bold;
           }
 
-          .container-generator textarea {
+          .container textarea {
             padding: 10px;
             width: 100%;
             font-size: 2rem;
           }
 
-          .container-generator select {
+          .container select {
             display: flex;
             padding: 10px;
             font-size: 2rem;
           }
 
-          .container-generator button {
+          .container button {
             margin-top: 15px;
             padding: 10px;
             border: none;
@@ -131,13 +138,13 @@ export default function ImageGenerator() {
             transition: all 1s;
           }
 
-          .container-generator button:hover {
+          .container button:hover {
             cursor: pointer;
             color: var(--theme);
             background-color: white;
           }
 
-          .container-generator .right {
+          .container .right {
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -145,23 +152,47 @@ export default function ImageGenerator() {
           }
 
           .container-output {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding-top: ${result ? '0' : '100%'};
             width: 100%;
             max-width: 768px;
-            height: ${result ? 'auto' : '768px'};
+            height: auto;
             border: 1px solid lightgray;
           }
 
           .container-output .holder {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            transform: translate(-50%, -50%);
+          }
+          .holder .error {
+            margin-top: 10px;
+            color: rgba(255, 0, 0, 0.553);
+            font-size: 1.4rem;
+            text-align: center;
+            white-space: pre-line;
           }
 
           .container-output .generated {
-            padding-top: 100%;
             position: relative;
-            height: 100%;
+            padding-top: 100%;
+            width: 100%;
+          }
+
+          @media screen and (max-width: 600px) {
+            .container {
+              flex-direction: column;
+            }
+
+            .container .right {
+              margin-top: 30px;
+              padding: 0;
+            }
           }
         `}
       </style>
