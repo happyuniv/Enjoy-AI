@@ -6,7 +6,7 @@ export default function image_generator() {
     <>
       <div className='container'>
         <section className='intro'>
-          <h1 className='title'>이미지 생성기 (Image Generator)</h1>
+          <h1 className='title'>이미지 생성기 {'\n'}(Image Generator)</h1>
           <div className='tag'>#Stable Diffusion #노벨AI #DALL-E</div>
           <h2>
             사진 예술작품 드론뷰 인테리어 우주 등등.. {'\n'}
@@ -73,8 +73,8 @@ export default function image_generator() {
             </li>
           </ul>
         </section>
-        <section className='experience'>
-          <h2 id='experience'>경험하기</h2>
+        <section id='experience' className='experience'>
+          <h2>경험하기</h2>
           <ul>
             <li>
               여기서 경험하는 인공지능은 Stable Diffusion v2.1 모델을 사용합니다
@@ -86,16 +86,21 @@ export default function image_generator() {
 
       <style jsx>{`
         .container {
+        }
+
+        section {
           padding: 0 30px;
         }
+
         .intro {
+          padding-top: 30px;
           background: linear-gradient(
             to bottom left,
             rgba(203, 249, 241, 0.147) 30%,
             white
           );
         }
-        .intro h1 {
+        .intro .title {
           font-size: 5rem;
         }
 
@@ -144,7 +149,7 @@ export default function image_generator() {
         }
 
         .ability .single {
-          min-height: 600px;
+          min-height: 500px;
         }
 
         .learn {
@@ -167,12 +172,11 @@ export default function image_generator() {
           margin: 20px 0;
         }
 
-        .learn li p {
-          margin-top: 5px;
-        }
-
         .learn li span {
           color: var(--theme);
+        }
+        .learn li p {
+          margin-top: 5px;
         }
 
         .experience {
@@ -191,6 +195,53 @@ export default function image_generator() {
           font-size: 1.4rem;
           list-style-position: inside;
           list-style-type: square;
+        }
+
+        @media screen and (max-width: 900px) {
+          .intro .title {
+            font-size: 3.2rem;
+            text-align: center;
+          }
+          .intro .tag {
+            text-align: center;
+          }
+          .intro h2 {
+            font-size: 2.5rem;
+            text-align: center;
+          }
+
+          .learn li {
+            text-align: center;
+          }
+          .learn li p {
+            font-size: 1.6rem;
+          }
+        }
+        @media screen and (max-width: 600px) {
+          .intro .title {
+            font-size: 3rem;
+            white-space: pre-line;
+          }
+          .intro h2 {
+            font-size: 2rem;
+          }
+          .ability h2 {
+            font-size: 2rem;
+          }
+          .ability h3 {
+            font-size: 1.6rem;
+          }
+          .ability article {
+            width: 100%;
+            padding-top: 50%;
+          }
+          .ability .single {
+            min-height: 300px;
+          }
+
+          .learn li p {
+            font-size: 1.4rem;
+          }
         }
       `}</style>
     </>
