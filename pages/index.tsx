@@ -1,8 +1,19 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Home() {
   return (
     <>
+      <header>
+        <nav>
+          <Link href={'/'} style={{ textDecoration: 'none' }}>
+            <div className='logo'>
+              <Image src='/logo.svg' alt='logo' width={32} height={32} />
+              <span className='name'>Enjoy AI</span>
+            </div>
+          </Link>
+        </nav>
+      </header>
       <section>
         <div className='outlay'></div>
         <video src='/main.mp4' autoPlay loop muted />
@@ -20,6 +31,35 @@ export default function Home() {
 
       <style jsx>
         {`
+          header {
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+          }
+
+          nav {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+          }
+
+          .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            letter-spacing: 1px;
+            word-spacing: -3px;
+          }
+          .logo .name {
+            margin-left: 5px;
+            font-size: 2rem;
+            font-weight: 600;
+            text-decoration: 'none';
+          }
+          .logo .name:hover {
+            color: var(--theme);
+          }
+          
           section {
             width: 100vw;
             max-width: 100%;
