@@ -7,7 +7,7 @@ export default function Layout({ children }: PropsWithChildren) {
 
   return (
     <>
-      <Header />
+      {router.pathname !== '/' && <Header />}
       <main>{children}</main>
 
       <style jsx global>
@@ -37,6 +37,9 @@ export default function Layout({ children }: PropsWithChildren) {
                 rgba(255, 255, 255, 0.88)
               )
               no-repeat;`};
+          }
+          main {
+            padding-top: ${router.pathname === '/' ? '0' : '92px'};
           }
         `}
       </style>
