@@ -1,38 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Enjoy-AI
+ChatGPT, Stable Diffusion 등 최신 인공지능 모델들을 소개하고 경험할 수 있는 웹사이트
 
-## Getting Started
+[**Project link**](https://enjoy-ai.vercel.app)
 
-First, run the development server:
+![enjoy-ai-1](https://user-images.githubusercontent.com/97126757/229430799-d7b8599d-bf9e-4cee-b0db-f6f88ee9776d.png)
+<br/>
+<br/>
+![enjoy-ai-2](https://user-images.githubusercontent.com/97126757/229430801-e5ce2fe3-6daa-44a5-af4d-7d0f810e2c79.png)
+<br/>
+<br/>
+![enjoy-ai-3](https://user-images.githubusercontent.com/97126757/229430796-dbf62470-ca39-43b9-acba-b0dacd6ffe05.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+---
+## Feature
+* Image upload
+* Chat typing
+* Loading/Error handling
+* Responsive
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Tool
+* Next.js
+* React
+* Typescript
+* [Cloudinary](https://cloudinary.com)
+* [OpenAI api](https://platform.openai.com/docs/api-reference)
+* [Replicate api](https://replicate.com/docs)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Deploy
+* Vercel 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
