@@ -8,10 +8,12 @@ export default function Header() {
   const [headerVisible, setHeaderVisible] = useState(true)
 
   useEffect(() => {
+    let lastScrollY = scrollY || 0
     const toggleHeader = () => {
-      if (document.body.clientHeight - scrollY < innerHeight + 10) {
-        setHeaderVisible(false)
-      } else setHeaderVisible(true)
+      if (scrollY >= lastScrollY) setHeaderVisible(false)
+      else setHeaderVisible(true)
+
+      lastScrollY = scrollY
     }
 
     const handleScroll = throttle(toggleHeader, 300)
