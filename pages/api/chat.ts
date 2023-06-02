@@ -27,9 +27,10 @@ export default async function handler(
     body: JSON.stringify(payload),
   })
 
+  if (!response.ok) res.status(500).json('Failed to fetch data')
+
   const data = await response.json()
   const result = data.choices[0].message.content
-
-  if (result) res.status(200).json(result)
-  else res.status(500).json('Failed to fetch data')
+  
+  res.status(200).json(result)
 }
