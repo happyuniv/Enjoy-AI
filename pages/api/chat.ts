@@ -14,7 +14,7 @@ export default async function handler(
         content: userMessage,
       },
     ],
-    max_tokens: 1000,
+    max_tokens: 2048,
     temperature: 0.7,
   }
 
@@ -27,10 +27,13 @@ export default async function handler(
     body: JSON.stringify(payload),
   })
 
-  if (!response.ok) res.status(500).json('Failed to fetch data')
+  if (!response.ok) {
+    res.status(500).json('Failed to fetch data')
+    return
+  }
 
   const data = await response.json()
   const result = data.choices[0].message.content
-  
+
   res.status(200).json(result)
 }
