@@ -18,22 +18,21 @@ export default async function handler(
     temperature: 0.7,
   }
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify(payload),
-  })
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify(payload),
+    })
 
-  if (!response.ok) {
-    res.status(500).json('Failed to fetch data')
-    return
+    const data = await response.json()
+    const result = data.choices[0].message.content
+
+    return res.status(200).json(result)
+  } catch (e) {
+    return res.status(500).json('Failed to fetch data')
   }
-
-  const data = await response.json()
-  const result = data.choices[0].message.content
-
-  res.status(200).json(result)
 }
